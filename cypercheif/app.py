@@ -52,6 +52,44 @@ from cypercheif.modules.identifier import identify
 # ── inject CSS ────────────────────────────────────────────────────────────────
 st.markdown(DARK_THEME_CSS, unsafe_allow_html=True)
 
+# ── App selection sidebar ─────────────────────────────────────────────────────
+app_selection = st.sidebar.radio(
+    "Select Application",
+    options=["🕹️ Ultimate Multiplayer Gaming Hub", "🔐 Cipher & Encoding Toolkit"],
+    index=0
+)
+
+if app_selection == "🕹️ Ultimate Multiplayer Gaming Hub":
+    import streamlit.components.v1 as components
+    import subprocess
+    
+    # Read the compiled single-file index.html
+    html_path = os.path.join(os.path.dirname(__file__), "..", "games", "game", "frontend", "dist", "index.html")
+    if os.path.exists(html_path):
+        with open(html_path, "r", encoding="utf-8") as f:
+            html_content = f.read()
+        
+        # Display the custom interactive gaming portal iframe
+        components.html(html_content, height=880, scrolling=True)
+    else:
+        st.error("Gaming Hub HTML bundle not found. Run 'npm run build' inside games/game/frontend.")
+        
+    # Start Node.js backend server in background
+    backend_dir = os.path.join(os.path.dirname(__file__), "..", "games", "game", "backend")
+    lock_file = os.path.join(backend_dir, "server.lock")
+    if not os.path.exists(lock_file):
+        try:
+            # Create lock file
+            with open(lock_file, "w") as lf:
+                lf.write("running")
+            # Spawn Node.js background process
+            log_file = open(os.path.join(backend_dir, "server.log"), "w")
+            subprocess.Popen(["node", "server.js"], cwd=backend_dir, shell=True, stdout=log_file, stderr=log_file)
+        except Exception as e:
+            pass
+            
+    st.stop()
+
 # ─────────────────────────────────────────────────────────────────────────────
 # HEADER
 # ─────────────────────────────────────────────────────────────────────────────

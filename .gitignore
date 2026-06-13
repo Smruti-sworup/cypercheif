@@ -1,0 +1,31 @@
+# Large binaries and dlls
+*.exe
+*.dll
+*.pak
+*.bin
+*.dat
+Antigravity.VisualElementsManifest.xml
+
+# Python
+__pycache__/
+*.pyc
+
+# Local config/cache
+.streamlit/
+.gemini/
+.git/
+
+# Folders to ignore (built app files)
+appx/
+bin/
+locales/
+resources/
+tools/
+
+# Node & Build caches
+node_modules/
+dist/
+!games/game/frontend/dist/index.html
+*.sqlite
+*.lock
+*.log
