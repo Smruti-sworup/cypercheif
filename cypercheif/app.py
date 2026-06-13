@@ -12,10 +12,10 @@ import streamlit as st
 
 # ── page config (must be first Streamlit call) ───────────────────────────────
 st.set_page_config(
-    page_title="Cipher & Encoding Toolkit",
-    page_icon="🔐",
+    page_title="Apex Arcade & Gaming Hub",
+    page_icon="🕹️",
     layout="wide",
-    initial_sidebar_state="collapsed",
+    initial_sidebar_state="expanded",
     menu_items={"Get Help": None, "Report a bug": None, "About": None},
 )
 
@@ -55,11 +55,11 @@ st.markdown(DARK_THEME_CSS, unsafe_allow_html=True)
 # ── App selection sidebar ─────────────────────────────────────────────────────
 app_selection = st.sidebar.radio(
     "Select Application",
-    options=["🕹️ Ultimate Multiplayer Gaming Hub", "🔐 Cipher & Encoding Toolkit"],
+    options=["🕹️ Apex Arcade (Gaming Hub)", "🔐 Cipher & Encoding Toolkit"],
     index=0
 )
 
-if app_selection == "🕹️ Ultimate Multiplayer Gaming Hub":
+if app_selection == "🕹️ Apex Arcade (Gaming Hub)":
     import streamlit.components.v1 as components
     import subprocess
     
